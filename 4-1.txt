@@ -1,0 +1,11 @@
+db.students.find( 
+{ "name": "Alice", "scores.type": "exam" }, 
+{ "name": 1, "scores.$": 1 } 
+)
+
+>db.students.find( 
+{ "name": "Bob" }, 
+{ "name": 1, "scores": { $elemMatch: { "type": "quiz" } } } 
+) 
+
+db.students.find({ "name": "Charlie" }, { scores: { $slice: 2 } });

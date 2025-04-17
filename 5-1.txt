@@ -1,0 +1,50 @@
+$avg - Calculate the average grade of all students 
+> db.students.aggregate([ 
+{ 
+$group: { 
+_id: null, 
+averageGrade: { $avg: "$grade" } 
+} 
+} 
+])
+
+$min - Find the minimum age of students 
+>db.students.aggregate([ 
+{ 
+$group: { 
+_id: null, 
+minAge: { $min: "$age" } 
+} 
+} 
+]) 
+
+$max - Find the maximum grade among students 
+>db.students.aggregate([ 
+{ 
+$group: { 
+_id: null, 
+maxGrade: { $max: "$grade" } 
+} 
+} 
+]) 
+
+$push - List all student names in an array 
+db.students.aggregate([ 
+{ 
+$group: { 
+_id: null, 
+allNames: { $push: "$name" } 
+} 
+} 
+]) 
+
+ $addToSet - List all unique courses taken by students 
+>db.students.aggregate([ 
+{ 
+$unwind: "$courses" 
+},
+$group: { _id: null, 
+uniqueCourses: { $addToSet: "$courses" } 
+} 
+} 
+])
